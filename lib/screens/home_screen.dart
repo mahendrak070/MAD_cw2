@@ -13,16 +13,18 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('My Recipe Book 📖'),
         actions: [
-          IconButton(
-            icon: Icon(Icons.favorite, color: Colors.white),
-            tooltip: "View Favorites",
+          TextButton(
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => FavoritesScreen()),
               );
             },
-          ),
+            child: Text(
+              'View Favorites',
+              style: TextStyle(color: Colors.white),
+            ),
+          )
         ],
       ),
       body: ListView.builder(
@@ -34,13 +36,11 @@ class HomeScreen extends StatelessWidget {
             elevation: 4,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             child: ListTile(
-              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              contentPadding: EdgeInsets.all(16),
               leading: CircleAvatar(
                 backgroundColor: Colors.deepOrange.shade100,
-                child: Text(
-                  recipe.title.substring(0, 1),
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+                child: Text(recipe.title.substring(0, 1),
+                    style: TextStyle(fontWeight: FontWeight.bold)),
               ),
               title: Text(recipe.title, style: Theme.of(context).textTheme.titleLarge),
               subtitle: Text(recipe.description),

@@ -7,16 +7,17 @@ import '../providers/recipe_provider.dart';
 class DetailsScreen extends StatelessWidget {
   final Recipe recipe;
 
-  const DetailsScreen({required this.recipe});
+  const DetailsScreen({Key? key, required this.recipe}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Using Consumer so that any changes to the recipe's favorite status are reflected immediately.
     return Scaffold(
       appBar: AppBar(
         title: Text('${recipe.title} Details 🍽️'),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -24,14 +25,14 @@ class DetailsScreen extends StatelessWidget {
             SizedBox(height: 8),
             Text(recipe.description, style: Theme.of(context).textTheme.bodyLarge),
             SizedBox(height: 16),
-            Text('Ingredients 🥕', style: Theme.of(context).textTheme.titleLarge),
+            Text('Ingredients', style: Theme.of(context).textTheme.titleLarge),
             SizedBox(height: 8),
             ...recipe.ingredients.map((ingredient) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 2.0),
                   child: Text('• $ingredient', style: Theme.of(context).textTheme.bodyMedium),
                 )),
             SizedBox(height: 16),
-            Text('Instructions 👩‍🍳', style: Theme.of(context).textTheme.titleLarge),
+            Text('Instructions', style: Theme.of(context).textTheme.titleLarge),
             SizedBox(height: 8),
             ...recipe.instructions.asMap().entries.map((entry) {
               int idx = entry.key;
@@ -52,6 +53,7 @@ class DetailsScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                     ),
                     onPressed: () {
+                      // Toggle the favorite status
                       recipeProvider.toggleFavorite(recipe);
                     },
                     icon: Icon(
