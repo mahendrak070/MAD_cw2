@@ -7,7 +7,7 @@ import '../providers/recipe_provider.dart';
 class DetailsScreen extends StatelessWidget {
   final Recipe recipe;
 
-  const DetailsScreen({Key? key, required this.recipe}) : super(key: key);
+  const DetailsScreen({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class DetailsScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 2.0),
                 child: Text('${idx + 1}. $instruction', style: Theme.of(context).textTheme.bodyMedium),
               );
-            }).toList(),
+            }),
             SizedBox(height: 20),
             Center(
               child: Consumer<RecipeProvider>(
